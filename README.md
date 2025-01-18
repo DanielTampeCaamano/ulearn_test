@@ -1,3 +1,61 @@
+## How to Install and Run the Project
+
+### 1. Clone the Repository
+
+- Clone this repository to any location of your choice.
+
+### 2. Access the Cloned Repository
+
+- Open a terminal in the cloned repository directory.
+  - Alternatively, if you're using a GUI, navigate to the folder and open a terminal there.
+
+### 3. Install Dependencies and Build the Project
+
+- Run the following commands in your terminal:
+  - `npm install`: Installs the required dependencies.
+  - `npm run build`: Builds the project.
+
+### 4. Run the Application
+
+- To run the application, use the command: `composer run dev`.
+- The app should now be accessible at `localhost:8000`.
+
+### 5. Running in Production
+
+- If you need to run the application in production, consider using Nginx or Apache.
+
+
+**Note:** You will need to register when first entering the application.
+
+
+## Troubleshooting "php artisan serve" Error
+
+If you encounter the following error:
+```
+php artisan serve (Failed to listen on 127.0.0.1:8000 (reason: ?))
+```
+It might be caused by a misconfigured PHP installation. You can troubleshoot it as follows:
+
+### Steps to Fix:
+
+1. Find the location of your `php.ini` file:
+   - Run `php --ini` in the terminal and navigate to the directory.
+2. Open the `php.ini` file and look for the `variables_order` directive.
+3. Change its value to:
+   ```ini
+   variables_order = "GPCS"
+   ```
+4. After making the change, restart your terminal. If necessary, restart your server or your computer.
+
+This should resolve the issue.
+
+### Why This Works:
+Laravel uses DotEnv to fetch environment variables instead of relying on PHP's environment variables. This configuration change ensures compatibility.
+
+--- 
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

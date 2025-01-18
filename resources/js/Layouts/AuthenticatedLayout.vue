@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-[#BBDEFB] dark:bg-[#0B3557]">
             <nav
-                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
+                class="border-b border-[#90CAF9] bg-[#E3F2FD] dark:border-[#102A43] dark:bg-[#102A43]"
             >
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -24,7 +24,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="flex shrink-0 items-center">
                                 <Link :href="route('dashboard')">
                                     <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
+                                        class="block h-9 w-auto fill-current text-[#0277BD] dark:text-[#81D4FA]"
                                     />
                                 </Link>
                             </div>
@@ -36,6 +36,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
+                                    class="text-[#01579B] hover:text-[#0277BD] dark:text-[#B0BEC5] dark:hover:text-[#81D4FA]"
                                 >
                                     Dashboard
                                 </NavLink>
@@ -50,7 +51,7 @@ const showingNavigationDropdown = ref(false);
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                                                class="inline-flex items-center rounded-md border border-transparent bg-[#E3F2FD] px-3 py-2 text-sm font-medium leading-4 text-[#0277BD] transition duration-150 ease-in-out hover:text-[#01579B] focus:outline-none dark:bg-[#102A43] dark:text-[#81D4FA] dark:hover:text-[#B0BEC5]"
                                             >
                                                 {{ $page.props.auth.user.name }}
 
@@ -73,6 +74,10 @@ const showingNavigationDropdown = ref(false);
                                     <template #content>
                                         <DropdownLink
                                             :href="route('profile.edit')"
+                                            :active="
+                                                route().current('profile.edit')
+                                            "
+                                            class="text-[#01579B] hover:text-[#0277BD] dark:text-[#B0BEC5] dark:hover:bg-[#0B3557] dark:hover:text-[#81D4FA]"
                                         >
                                             Profile
                                         </DropdownLink>
@@ -80,6 +85,7 @@ const showingNavigationDropdown = ref(false);
                                             :href="route('logout')"
                                             method="post"
                                             as="button"
+                                            class="text-[#01579B] hover:text-[#0277BD] dark:text-[#B0BEC5] dark:hover:bg-[#0B3557] dark:hover:text-[#81D4FA]"
                                         >
                                             Log Out
                                         </DropdownLink>
@@ -95,7 +101,7 @@ const showingNavigationDropdown = ref(false);
                                     showingNavigationDropdown =
                                         !showingNavigationDropdown
                                 "
-                                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
+                                class="inline-flex items-center justify-center rounded-md p-2 text-[#0277BD] transition duration-150 ease-in-out hover:bg-[#BBDEFB] hover:text-[#01579B] focus:bg-[#BBDEFB] focus:text-[#01579B] dark:text-[#81D4FA] dark:hover:bg-[#0B3557] dark:hover:text-[#B0BEC5] dark:focus:bg-[#0B3557] dark:focus:text-[#B0BEC5]"
                             >
                                 <svg
                                     class="h-6 w-6"
@@ -132,56 +138,70 @@ const showingNavigationDropdown = ref(false);
                 </div>
 
                 <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{
-                        block: showingNavigationDropdown,
-                        hidden: !showingNavigationDropdown,
-                    }"
-                    class="sm:hidden"
+                <Transition
+                    enter-active-class="transition-all duration-500 ease-in-out"
+                    enter-from-class="max-h-0 opacity-0 overflow-hidden"
+                    enter-to-class="max-h-[500px] opacity-100 overflow-hidden"
+                    leave-active-class="transition-all duration-500 ease-in"
+                    leave-from-class="max-h-[500px] opacity-100 overflow-hidden"
+                    leave-to-class="max-h-0 opacity-0 overflow-hidden"
                 >
-                    <div class="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <!-- Responsive Settings Options -->
                     <div
-                        class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600"
+                        v-show="showingNavigationDropdown"
+                        class="bg-[#E3F2FD] sm:hidden dark:bg-[#102A43]"
                     >
-                        <div class="px-4">
-                            <div
-                                class="text-base font-medium text-gray-800 dark:text-gray-200"
+                        <div class="space-y-1 pb-3 pt-2">
+                            <ResponsiveNavLink
+                                :href="route('dashboard')"
+                                :active="route().current('dashboard')"
+                                class="text-[#01579B] hover:text-[#0277BD] dark:text-[#B0BEC5] dark:hover:bg-[#0B3557] dark:hover:text-[#81D4FA]"
                             >
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="text-sm font-medium text-gray-500">
-                                {{ $page.props.auth.user.email }}
-                            </div>
+                                Dashboard
+                            </ResponsiveNavLink>
                         </div>
 
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
+                        <!-- Responsive Settings Options -->
+                        <div
+                            class="border-t border-[#90CAF9] pb-1 pt-4 dark:border-[#102A43]"
+                        >
+                            <div class="px-4">
+                                <div
+                                    class="text-base font-medium text-[#01579B] dark:text-[#B0BEC5]"
+                                >
+                                    {{ $page.props.auth.user.name }}
+                                </div>
+                                <div
+                                    class="text-sm font-medium text-[#0277BD] dark:text-[#81D4FA]"
+                                >
+                                    {{ $page.props.auth.user.email }}
+                                </div>
+                            </div>
+
+                            <div class="mt-3 space-y-1">
+                                <ResponsiveNavLink
+                                    :href="route('profile.edit')"
+                                    :active="route().current('profile.edit')"
+                                    class="text-[#01579B] hover:text-[#0277BD] dark:text-[#B0BEC5] dark:hover:bg-[#0B3557] dark:hover:text-[#81D4FA]"
+                                >
+                                    Profile
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    :href="route('logout')"
+                                    method="post"
+                                    as="button"
+                                    class="text-[#01579B] hover:text-[#0277BD] dark:text-[#B0BEC5] dark:hover:bg-[#0B3557] dark:hover:text-[#81D4FA]"
+                                >
+                                    Log Out
+                                </ResponsiveNavLink>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Transition>
             </nav>
 
             <!-- Page Heading -->
             <header
-                class="bg-white shadow dark:bg-gray-800"
+                class="bg-[#E3F2FD] shadow dark:bg-[#102A43]"
                 v-if="$slots.header"
             >
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
