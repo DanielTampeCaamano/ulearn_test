@@ -1,5 +1,8 @@
 ## How to Install and Run the Project
 
+### 0. Check if you have the tools needed for running this Laravel project. 
+- Make sure that your machine has PHP, Composer, and the Laravel installer installed. If thats not the case then check the information [here](https://laravel.com/docs/11.x/installation). 
+
 ### 1. Clone the Repository
 
 - Clone this repository to any location of your choice.
@@ -12,6 +15,7 @@
 ### 3. Install Dependencies and Build the Project
 
 - Run the following commands in your terminal:
+  - `php artisan migrate`: Runs the migrations needed for the project database
   - `npm install`: Installs the required dependencies.
   - `npm run build`: Builds the project.
 
