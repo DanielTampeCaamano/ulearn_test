@@ -12,11 +12,12 @@
 - Open a terminal in the cloned repository directory.
   - Alternatively, if you're using a GUI, navigate to the folder and open a terminal there.
 
-### 3. Install Dependencies and Build the Project
-
+### 3. Install Dependencies and Build the Project (Update 20/01/2024)
+(I noticed there were some setup commands that were missing here in the instructions so I edited the Readme to fix the error it causes not using them.)
 - Run the following commands in your terminal:
-  - `php artisan migrate`: Runs the migrations needed for the project database
-  - `npm install`: Installs the required dependencies.
+  - `composer install`: It install all the dependencies that Laravel uses 
+  - `composer run setup`: Runs the necessary commands that setup the project to be ready to run, like the **.env** file and other configurations
+  - `npm install`: Installs the required dependencies for Vite.
   - `npm run build`: Builds the project.
 
 ### 4. Run the Application
